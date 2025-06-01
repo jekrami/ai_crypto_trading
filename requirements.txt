@@ -1,0 +1,14 @@
+PyYAML>=5.0 # For reading YAML configuration files (like settings.yaml)
+requests>=2.0.0 # For making HTTP requests (e.g., to APIs like Cryptopanic)
+pandas>=1.0.0
+numpy<2.0 # Downgraded for pandas-ta 0.3.14b0 compatibility
+pandas-ta==0.3.14b0 # Specific version due to NumPy 1.x and pip index limitations
+ollama>=0.2.0 # For interacting with Ollama
+# scipy # For scientific and technical computing
+# scikit-learn # For machine learning tasks
+# matplotlib # For plotting (exploratory analysis)
+# seaborn # For enhanced visualizations
+# sqlalchemy # For more advanced database interactions (optional, if SQLite direct is not enough)
+# python-dotenv # For managing environment variables (e.g., for API keys)
+# pytest # For running tests
+# ccxt # For interacting with cryptocurrency exchanges (if applicable)
