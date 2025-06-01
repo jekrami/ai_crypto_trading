@@ -1,0 +1,95 @@
+# Example Configuration File for Trading System
+
+# Database Configuration
+# Define the type and connection details for the database.
+# For SQLite, only the path is typically needed.
+database:
+  type: "sqlite"
+  path: "data/trading_system.db" # Relative to the project root, e.g. value: "data/your_database_name.db"
+  # For other DBs, you might have:
+  # host: "localhost"
+  # port: 5432
+  # username: "your_db_user"
+  # password: "your_db_password"
+  # dbname: "trading_db"
+
+# Data Paths
+# Define paths for various data directories. Paths can be relative to project root or absolute.
+data_paths:
+  raw_ohlcv_dir: "data/raw_ohlcv/" # Directory for raw OHLCV CSV files
+  processed_data_dir: "data/processed/" # Example for processed data
+  # other_data_dir: "data/other/"
+
+# API Configurations
+# Store external API keys and base URLs here.
+# IMPORTANT: For production, consider using environment variables or a secrets manager
+# instead of hardcoding keys in config files, especially if the repo is public.
+api_configs:
+  cryptopanic:
+    api_key: "YOUR_API_KEY_HERE" # Replace with your actual key
+    base_url: "https://cryptopanic.com/api/v1/"
+  # example_exchange:
+  #   api_key: "YOUR_EXCHANGE_API_KEY"
+  #   api_secret: "YOUR_EXCHANGE_API_SECRET"
+  #   base_url: "https://api.example.com/"
+
+# Logging Configuration
+logging:
+  level: "INFO" # e.g., DEBUG, INFO, WARNING, ERROR, CRITICAL
+  log_file: "logs/trading_system.log" # Relative to the project root
+  max_file_size_mb: 10
+  backup_count: 5
+
+# Trading Parameters (Example)
+trading:
+  default_instrument: "BTC/USD"
+  max_risk_per_trade: 0.01 # e.g., 1% of total capital
+  # Add other strategy-specific parameters here
+
+# Other settings
+# Add any other application-wide settings as needed
+settings:
+  timezone: "UTC"
+  # feature_flags:
+  #   new_feature_x: true
+  #   experimental_strategy_y: false
+
+# Ollama Settings for AI Model Interaction
+ollama_settings:
+  host: "http://127.0.0.1:11434" # Default Ollama host
+  model: "llama3"                # Default model to use
+  default_timeout_seconds: 60    # Default timeout for API requests
+  # For testing without a running Ollama instance:
+  # Set mock_ollama_for_testing to true to use the mock_response_text below.
+  # This is useful for pipeline development and testing when Ollama is not available.
+  mock_ollama_for_testing: true # Ensuring mock for this run
+  mock_response_text: "Signal: BUY. Reasoning: Based on the provided technical indicators showing an upward trend and recent positive news, a BUY action is recommended for BTCUSD. The RSI is not overbought, and MACD is showing bullish convergence. (Mocked Test)"
+
+# Backtesting Defaults
+backtesting_defaults:
+  initial_capital: 10000.0
+  fee_percent: 0.001       # Standard transaction fee (0.1%)
+  slippage_percent: 0.0005 # Standard slippage (0.05%)
+
+# Risk Management Defaults
+risk_management_defaults:
+  risk_per_trade_percent: 0.01 # Risk 1% of account equity per trade
+  default_stop_loss:
+    type: "PERCENTAGE"  # Options: PERCENTAGE, ATR, FIXED_VALUE, RECENT_SWING
+    value: 0.02         # Meaning: 2% for PERCENTAGE, ATR multiplier for ATR, price distance for FIXED_VALUE
+    # offset_percent: 0.001 # Only for RECENT_SWING: buffer beyond swing point
+  default_take_profit:
+    type: "RISK_REWARD_RATIO" # Options: RISK_REWARD_RATIO, PERCENTAGE, ATR_MULTIPLE_FROM_ENTRY
+    value: 1.5                # Meaning: 1.5 R:R, 3% for PERCENTAGE (e.g. 0.03), ATR multiplier for ATR_MULTIPLE
+  # Asset specific details (optional, can be used by position sizer or order modifiers)
+  # btc_price_increment: 0.01 # Smallest price change for BTC/USD
+  # eth_price_increment: 0.01 # Smallest price change for ETH/USD
+
+# Simulated Exchange Defaults
+simulated_exchange_defaults:
+  initial_balances:
+    USD: 10000.0
+    BTC: 0.0
+    ETH: 0.0
+  fee_percent: 0.001 # Standard trading fee (0.1%)
+  # default_slippage_percent: 0.0005 # Optional: if exchange adds its own slippage distinct from backtester

@@ -1,0 +1,76 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+pip-wheel-metadata/
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+# virtualenv/
+# VIRTUAL_ENV/
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+# Keep specific log files if necessary by negating, e.g. !logs/important.log
+# For this setup, we might want to ignore all logs by default.
+logs/*.log
+!logs/.gitkeep # Example if you want to keep the directory
+
+# IDEs and Editors
+.idea/
+.vscode/
+*.swp
+*~
+*.sublime-project
+*.sublime-workspace
+
+# Build artifacts
+build/
+dist/
+*.tar.gz
+*.zip
+
+# Notebooks
+.ipynb_checkpoints
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Coverage reports
+.coverage
+htmlcov/
+coverage.xml
+
+# Temporary files
+*.tmp
+*.bak
+*.patch
+
+# Secrets - although ideally these are not even in config files tracked by git
+# config/secrets.yaml
+# config/credentials.json
+
+# If you have specific data files you don't want to track (e.g., large raw data)
+# data/raw_ohlcv/*.csv # Be careful, task asks for raw_ohlcv for CSVs
+# data/processed_data/
+
+# Docker
+docker-compose.override.yml
+.dockerignore
+
+# Security
+*.pem
+*.key
+
+# PyInstaller
+# ------------
+*.manifest
+*.spec
